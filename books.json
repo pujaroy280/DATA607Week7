@@ -1,0 +1,22 @@
+{
+    "books": [
+        {
+            "title": "The Fire This Time: A New Generation Speaks about Race",
+            "authors": "Jesmyn Ward (Editor), Clint Smith (Contributor), Kevin Young (Contributor), Mitchell S. Jackson (Contributor), Natasha Trethewey (Contributor), Daniel José Older (Contributor), Edwidge Danticat (Contributor), Honorée Fanonne Jeffers (Contributor), Claudia Rankine (Contributor), Isabel Wilkerson (Contributor)",
+            "rating": 4.3,
+            "num_ratings": "14000+"
+        },
+        {
+            "title": "The Race Card: How Bluffing About Bias Makes Race Relations Worse",
+            "authors": "Richard Thompson Ford, Karen E. Fields",
+            "rating": 4.1,
+            "num_ratings": "50+"
+        },
+        {
+            "title": "This Bridge Called My Back: Writings by Radical Women of Color",
+            "authors": "Cherríe L. Moraga (Editor), Gloria Anzaldúa (Editor), Toni Cade Bambara (Contributor), Audre Lorde (Contributor), Barbara Smith (Contributor), Ana Castillo (Contributor), Cherrie Moraga (Contributor), and others",
+            "rating": 4.4,
+            "num_ratings": "10000+"
+        }
+    ]
+}
