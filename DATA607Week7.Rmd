@@ -1,0 +1,111 @@
+---
+title: "Working with XML and JSON in R"
+author: "Puja Roy"
+date: "`r Sys.Date()`"
+output: openintro::lab_report
+---
+
+### Introduction
+
+The objective of this assignment is to select three of your favorite books on one of your favorite subjects. At least one of the books should have more than one author. For each book, include the title, authors, and two or three other attributes that you find
+interesting.
+
+Take the information that you’ve selected about these three books, and separately create three files which store the book’s information in HTML (using an html table), XML, and JSON formats (e.g. “books.html”,“books.xml”, and “books.json”).
+
+Write R code, using your packages of choice, to load the information from each of the three sources into separate R data frames. Are the three data frames identical?
+
+I selected 3 of my favorite books based on the subject of race that contain multiple authors shown below:
+
+**"The Fire This Time: A New Generation Speaks about Race"** by Jesmyn Ward (Editor), Clint Smith (Contributor), Kevin Young (Contributor), Mitchell S. Jackson (Contributor), Natasha Trethewey (Contributor), Daniel José Older (Contributor), Edwidge Danticat (Contributor), Honorée Fanonne Jeffers (Contributor), Claudia Rankine (Contributor), Isabel Wilkerson (Contributor)
+
+Goodreads Rating: 4.3/5
+
+Number of ratings: 14,000+
+
+**"The Race Card: How Bluffing About Bias Makes Race Relations Worse"** by Richard Thompson Ford, Karen E. Fields
+
+Amazon Rating: 4.1/5
+
+Number of ratings: 50+
+
+**"This Bridge Called My Back: Writings by Radical Women of Color"** by Cherríe L. Moraga (Editor), Gloria Anzaldúa (Editor), Toni Cade Bambara (Contributor), Audre Lorde (Contributor), Barbara Smith (Contributor), Ana Castillo (Contributor), Cherrie Moraga (Contributor), and others
+
+Goodreads Rating: 4.4/5
+
+Number of ratings: 10,000+
+
+I created the files: "books.html", "books.xml", and "books.json" with the information of these books in their respective formats. Then, I loaded the information from each source into separate R data frames.
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
+
+# Load necessary libraries
+library(xml2)
+library(jsonlite)
+library(httr)
+library(rvest)
+```
+
+### Load HTML data into a data frame
+
+```{r}
+html_url <- "https://raw.githubusercontent.com/pujaroy280/DATA607Week7/main/books.html"
+html_content <- GET(html_url)
+html_text <- content(html_content, "text")
+html_df <- read_html(html_text) %>% html_table()
+```
+
+### Load XML data into a data frame
+```{r}
+xml_url <- "https://raw.githubusercontent.com/pujaroy280/DATA607Week7/main/books.xml"
+xml_content <- xml2::read_xml(xml_url)
+xml_df <- xml2::as_list(xml_content)
+```
+### Load JSON data into a data frame
+
+```{r}
+json_url <- "https://raw.githubusercontent.com/pujaroy280/DATA607Week7/main/books.json"
+json_content <- GET(json_url)
+json_text <- content(json_content, "text")
+json_df <- fromJSON(json_text)
+```
+
+### Print the data frames
+
+```{r}
+print("HTML Data Frame:")
+print(html_df)
+```
+```{r}
+print("\nXML Data Frame:")
+print(xml_df)
+```
+```{r}
+print("\nJSON Data Frame:")
+print(json_df)
+```
+### Check dimensions
+```{r}
+dim(html_df) == dim(xml_df)
+dim(html_df) == dim(json_df)
+dim(xml_df) == dim(json_df)
+```
+### Check structure
+```{r}
+identical(colnames(html_df), colnames(xml_df))
+identical(colnames(html_df), colnames(json_df))
+identical(colnames(xml_df), colnames(json_df))
+```
+
+### Check content
+```{r}
+identical(html_df, xml_df)
+identical(html_df, json_df)
+identical(xml_df, json_df)
+```
+
+### Conclusion: Are the three data frames identical?
+
+No, the three data frames are not identical because HTML, XML, and JSON have different data structures. While the information is the same, they are represented differently in each format. However, it is proven that they contain the same data.
+
